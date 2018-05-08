@@ -19,7 +19,7 @@ public class NewsFeed extends AppCompatActivity {
     private Newsadapter newsadapter;
     private Newsmodel newsmodel;
     private LinearLayout linearLayout;
-    private String api_url = "https://yts.am/api/v2/list_movies.json?limit=10&page=1";
+    private String api_url = "https://yts.am/api/v2/list_movies.json?limit=10&page=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
