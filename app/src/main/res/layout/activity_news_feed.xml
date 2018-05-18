@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".NewsFeed"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="1dp">
 
         <android.support.v7.widget.RecyclerView
@@ -23,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:padding="@dimen/newsfeed_card_padding"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/pBarList"
         android:gravity="center">
 
@@ -41,5 +40,4 @@
             android:layout_marginStart="10dp"
             android:fontFamily="sans-serif"/>
     </LinearLayout>
-
 </RelativeLayout>
