@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -80,10 +82,20 @@ public class ProfileActivity extends AppCompatActivity {
                         R.drawable.notification_ic,
                         R.drawable.logout_ic
                 };
+        String [] titles =
+                {
+                        "Home",
+                        "Edit",
+                        "Resume",
+                        "Messages",
+                        "Notifications",
+                        "Logout"
+                };
         for (int x = 0; x < images.length; x++)
         {
             Profileitems profileitems = new Profileitems();
             profileitems.setSmallIcon(images[x]);
+            profileitems.setId(titles[x]);
             profileitemsList.add(profileitems);
         }
 
@@ -97,6 +109,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profile,menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return true;
+    }
 
     private void loadPhoto(View view, String image_url)
     {

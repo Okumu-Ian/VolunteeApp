@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -25,9 +26,11 @@ public class Profileadapter extends RecyclerView.Adapter<Profileadapter.Profilef
     public class ProfilefabHolder extends RecyclerView.ViewHolder
     {
         private FloatingActionButton floatingActionButton;
+        private TextView textView;
         public ProfilefabHolder(View itemView) {
             super(itemView);
             floatingActionButton = (FloatingActionButton) itemView.findViewById(R.id.item_fab);
+            textView = (TextView) itemView.findViewById(R.id.txt_full_profile_description);
         }
     }
 
@@ -63,6 +66,7 @@ public class Profileadapter extends RecyclerView.Adapter<Profileadapter.Profilef
             }
         });
         Picasso.get().load(profileitems.getSmallIcon()).into(holder.floatingActionButton);
+        holder.textView.setText(profileitems.getId());
     }
 
     private void clickListener(int position)

@@ -1,7 +1,9 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,6 +38,7 @@ public class NewsFeed extends AppCompatActivity {
     private Newsmodel newsmodel;
     private LinearLayout linearLayout;
     private Context mContext;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -45,10 +48,25 @@ public class NewsFeed extends AppCompatActivity {
         initUI();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void initUI()
     {
         news_list = (RecyclerView) findViewById(R.id.newsFeedList);
         linearLayout = (LinearLayout) findViewById(R.id.pBarList);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+        //swipeRefreshLayout.setColorSchemeColors(R.color.blue,R.color.colorAccent,R.color.green,R.color.yellow);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadFirstPage();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                },5000);
+            }
+        });
         newsmodelList =  new ArrayList<>();
 
         LinearLayoutManager manager = new LinearLayoutManager(NewsFeed.this,LinearLayoutManager.VERTICAL,false);
@@ -115,6 +133,7 @@ public class NewsFeed extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(mContext).add(request);
+        //swipeRefreshLayout.setRefreshing(false);
 
     }
 
