@@ -11,13 +11,7 @@ public abstract class InfiniteScroller extends
     private boolean loading = true;
     private int visibleThreshold = 10;
     private int firstVisibleItem, visibleItemCount, totalItemCount;
-
-
-
     private int current_page = 1;
-
-    private LinearLayoutManager mLinearLayoutManager;
-    private RecyclerView.LayoutManager manager;
 
     public InfiniteScroller() {
 
@@ -38,21 +32,11 @@ public abstract class InfiniteScroller extends
             }
         }
 
-
-
-
         if (!loading
                 && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
-            // End has been reached
-
-            // Do something
             current_page++;
-
             onLoadMore(current_page);
-
             loading = true;
-
-
         }
     }
 

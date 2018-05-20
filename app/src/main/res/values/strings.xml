@@ -3,4 +3,5 @@
     <string name="test_name">Britt Nicole</string>
     <string name="just_now">Just Now</string>
     <string name="test_string">Lorem ipsum dolor sit amet, consectetur elit. Etiam efficirur ipsum in placerat molestie. Fusce quis mauris a enim solicitudin.</string>
+    <string name="catching_more">Please wait as we fetch more.</string>
 </resources>

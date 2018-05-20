@@ -7,13 +7,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="1dp">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/newsFeedList"
-            android:layout_above="@+id/pBarList"
             >
         </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading more .."
+            android:text="@string/catching_more"
             android:textSize="@dimen/newsfeed_15sp"
             android:textColor="@color/black"
             android:textStyle="bold|italic"

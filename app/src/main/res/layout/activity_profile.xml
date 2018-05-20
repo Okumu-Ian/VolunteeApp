@@ -7,21 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-  <ImageView
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
       android:layout_width="match_parent"
-      android:layout_height="150dp" />
+      android:layout_height="200dp"
+        android:scaleType="fitXY"
+      android:id="@+id/img_profile_cover"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="110dp">
+        android:layout_marginTop="150dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/grey"
+            android:id="@+id/img_profile_photo"
             />
 
         <TextView
@@ -38,11 +46,12 @@
             android:layout_marginTop="2dp"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:id="@+id/profileItemList">
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>

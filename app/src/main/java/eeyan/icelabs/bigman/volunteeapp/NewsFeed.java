@@ -1,6 +1,7 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -125,7 +126,6 @@ public class NewsFeed extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(web_url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try
                 {
                     JSONObject other = response.getJSONObject("data");
@@ -149,7 +149,6 @@ public class NewsFeed extends AppCompatActivity {
                 }
                 catch (JSONException exception)
                 {
-
                 }
 
             }

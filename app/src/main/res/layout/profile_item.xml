@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.FloatingActionButton
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:src="@drawable/test_icon"
-    android:layout_margin="10dp"
-    android:id="@+id/fabProfileItem"
-    android:tint="@color/white">
-
-</android.support.design.widget.FloatingActionButton>
+    <android.support.design.widget.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:padding="2dp"
+        app:srcCompat="@drawable/test_icon"
+        android:tint="@color/white"
+        app:elevation="6dp"
+        android:translationZ="5dp"
+        app:pressedTranslationZ="5dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="7.5dp"
+        android:layout_marginEnd="7.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:layout_marginTop="7.5dp"
+        android:id="@+id/item_fab"/>
