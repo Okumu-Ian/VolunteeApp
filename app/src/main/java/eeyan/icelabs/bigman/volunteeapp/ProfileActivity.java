@@ -88,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
                         "Edit",
                         "Resume",
                         "Messages",
-                        "Notifications",
+                        "Alerts",
                         "Logout"
                 };
         for (int x = 0; x < images.length; x++)
@@ -102,8 +102,8 @@ public class ProfileActivity extends AppCompatActivity {
         profileadapter = new Profileadapter(profileitemsList,ProfileActivity.this);
         recyclerView.setAdapter(profileadapter);
 
-        String photo = "https://images.unsplash.com/photo-1506158981101-17d5fadfa720?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e7d95e455554ef8e79ab93a24e450b9c&auto=format&fit=crop&w=634&q=80";
-        String photo2 = "https://images.unsplash.com/photo-1526371962155-8f27ed893ab7?ixlib=rb-0.3.5&s=9b12ed29be8300e4dbe42b1a7f58e15a&auto=format&fit=crop&w=1350&q=80";
+        String photo = "https://images.unsplash.com/photo-1511546395756-590dffdcdbd1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fb6c2fb68225c3cfac850fdf4a4cee25&auto=format&fit=crop&w=1049&q=80";
+        String photo2 = "https://images.unsplash.com/photo-1503385824845-4f3407ce5e03?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9217a85a5ea86011aa582344960c31d6&auto=format&fit=crop&w=1050&q=80";
         loadPhoto(circleImageView,photo);
         loadPhoto(imageView,photo2);
     }

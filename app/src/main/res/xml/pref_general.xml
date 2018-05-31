@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/general_setting"
+        >
+
+        <ListPreference
+            android:defaultValue="2"
+            android:dialogTitle="@string/privacy"
+            android:entryValues="@array/profile_privacy"
+            android:entries="@array/profile_privacy"
+            android:summary="Choose who sees your profile"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

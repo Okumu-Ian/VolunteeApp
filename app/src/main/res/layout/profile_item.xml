@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:layout_height="wrap_content"
-    android:layout_width="100dp"
+    android:layout_width="75dp"
     android:layout_gravity="center"
     android:orientation="vertical"
     android:layout_marginStart="7.5dp"
