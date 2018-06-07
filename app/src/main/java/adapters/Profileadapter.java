@@ -2,6 +2,7 @@ package adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import eeyan.icelabs.bigman.volunteeapp.R;
+import eeyan.icelabs.bigman.volunteeapp.Settings;
 import models.Profileitems;
 
 /**
@@ -38,9 +40,10 @@ public class Profileadapter extends RecyclerView.Adapter<Profileadapter.Profilef
     private Context mContext;
     private Activity mActivity;
 
-    public Profileadapter(List<Profileitems> list, Context mContext) {
+    public Profileadapter(List<Profileitems> list, Context mContext,Activity mActivity) {
         this.list = list;
         this.mContext = mContext;
+        this.mActivity = mActivity;
     }
 
     @Override
@@ -72,6 +75,10 @@ public class Profileadapter extends RecyclerView.Adapter<Profileadapter.Profilef
     private void clickListener(int position)
     {
         Toast.makeText(mContext, position+" Coming soon.", Toast.LENGTH_SHORT).show();
+        if (position == 2)
+        {
+            mContext.startActivity(new Intent(mActivity, Settings.class));
+        }
     }
 
     @Override

@@ -1,14 +1,21 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -38,6 +45,7 @@ public class NewsFeed extends AppCompatActivity {
     private Newsmodel newsmodel;
     private LinearLayout linearLayout;
     private Context mContext;
+    private int REQUEST_CODE = 0101;
     private SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -46,6 +54,53 @@ public class NewsFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
         initUI();
+    }
+
+    private boolean isReadStorageAllowed() {
+        boolean staus = false;
+        //Getting the permission status
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        //If permission is granted returning true
+        if (result == PackageManager.PERMISSION_GRANTED)
+            staus = true;
+        //If permission is not granted returning false
+        return staus;
+    }
+
+    public void checkPermission()
+    {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+
+        }
+        ActivityCompat.requestPermissions(NewsFeed.this,new String[]{Manifest.permission.INTERNET,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS},REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==REQUEST_CODE)
+        {
+            if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(mContext, "Permission granted!", Toast.LENGTH_SHORT).show();
+            }else
+            {
+                Toast.makeText(mContext, "Permission grant failed.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_news_feed,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(mContext, ""+item.getTitle(), Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     @SuppressLint("ResourceAsColor")
@@ -84,6 +139,12 @@ public class NewsFeed extends AppCompatActivity {
            }
        });
 
+        if (!isReadStorageAllowed())
+        {
+            checkPermission();
+        }
+        getSupportActionBar().setLogo(R.drawable.other_test_icon);
+        getSupportActionBar().setIcon(R.drawable.other_test_icon);
         loadFirstPage();
 
     }

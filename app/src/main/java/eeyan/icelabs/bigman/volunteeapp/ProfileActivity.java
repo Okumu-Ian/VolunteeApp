@@ -1,5 +1,6 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,10 +100,10 @@ public class ProfileActivity extends AppCompatActivity {
             profileitemsList.add(profileitems);
         }
 
-        profileadapter = new Profileadapter(profileitemsList,ProfileActivity.this);
+        profileadapter = new Profileadapter(profileitemsList,ProfileActivity.this,ProfileActivity.this);
         recyclerView.setAdapter(profileadapter);
 
-        String photo = "https://images.unsplash.com/photo-1511546395756-590dffdcdbd1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fb6c2fb68225c3cfac850fdf4a4cee25&auto=format&fit=crop&w=1049&q=80";
+        String photo = "https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1cf9c13e09f5f2ec5139b6475751b310&auto=format&fit=crop&w=1050&q=80";
         String photo2 = "https://images.unsplash.com/photo-1503385824845-4f3407ce5e03?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9217a85a5ea86011aa582344960c31d6&auto=format&fit=crop&w=1050&q=80";
         loadPhoto(circleImageView,photo);
         loadPhoto(imageView,photo2);
@@ -118,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        startActivity(new Intent(ProfileActivity.this,Settings.class));
         return true;
     }
 

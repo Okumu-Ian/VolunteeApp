@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="3.5dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
     android:layout_margin="@dimen/newsfeed_card_padding"
     >
         <LinearLayout

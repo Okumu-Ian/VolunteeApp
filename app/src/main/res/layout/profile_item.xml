@@ -17,6 +17,7 @@
         android:padding="2dp"
         app:srcCompat="@drawable/test_icon"
         android:tint="@color/white"
+        android:background="@drawable/background_ripple"
         app:elevation="6dp"
         android:translationZ="5dp"
         app:pressedTranslationZ="5dp"

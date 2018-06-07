@@ -7,7 +7,7 @@
     <dimen name="newsfeed_row_height">200dp</dimen>
     <dimen name="newsfeed_row_card_margin_left">30dp</dimen>
     <dimen name="newsfeed_row_dot_margin_top">5dp</dimen>
-    <dimen name="newsfeed_card_padding">7.5dp</dimen>
+    <dimen name="newsfeed_card_padding">4.5dp</dimen>
     <dimen name="newsfeed_17sp">17sp</dimen>
     <dimen name="newsfeed_15sp">15sp</dimen>
     <dimen name="newsfeed_txt_padding">2dp</dimen>

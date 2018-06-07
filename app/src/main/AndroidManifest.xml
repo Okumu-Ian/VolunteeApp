@@ -29,7 +29,8 @@
         </activity>
         <activity android:name=".MainFeed">
         </activity>
-
+        <activity android:name=".AppCompatPreferenceActivity"/>
+        <activity android:name=".Settings"/>
     </application>
 
 </manifest>
