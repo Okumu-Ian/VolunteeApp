@@ -19,18 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".NewsFeed">
+        </activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".MainFeed"></activity>
+        <activity android:name=".AppCompatPreferenceActivity" />
+        <activity android:name=".Settings" />
+        <activity android:name=".PickSkill"
+            android:label="Pick your skill">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity">
-        </activity>
-        <activity android:name=".MainFeed">
-        </activity>
-        <activity android:name=".AppCompatPreferenceActivity"/>
-        <activity android:name=".Settings"/>
     </application>
 
 </manifest>
