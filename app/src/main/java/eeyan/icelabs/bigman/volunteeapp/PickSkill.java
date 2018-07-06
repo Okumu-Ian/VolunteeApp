@@ -1,10 +1,13 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,6 +23,7 @@ public class PickSkill extends AppCompatActivity {
     private List<SkillModel> modelList;
     private SkillModel skillModel;
     private SkillAdapter adapter;
+    private android.widget.SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +78,39 @@ public class PickSkill extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    long meterNumber = 37163905674L;
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.app_bar_search)
+        {
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_skill_set,menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (android.widget.SearchView) menu.findItem(R.id.app_bar_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                adapter.getFilter().filter(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return true;
+            }
+        });
         return true;
     }
 }
