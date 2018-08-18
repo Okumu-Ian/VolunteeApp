@@ -145,4 +145,6 @@
         completions."
     </string>
     <string name="title_activity_web_page">WebPage</string>
+    <string name="app_id">ca-app-pub-3516471139276349~4217472411</string>
+    <string name="ad_unit_id">ca-app-pub-3516471139276349/6908458202</string>
 </resources>

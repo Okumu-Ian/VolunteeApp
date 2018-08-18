@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "680958823040",
+    "firebase_url": "https://volunteeapp-1b5db.firebaseio.com",
+    "project_id": "volunteeapp-1b5db",
+    "storage_bucket": "volunteeapp-1b5db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680958823040:android:63b149e0e0b1fdc8",
+        "android_client_info": {
+          "package_name": "eeyan.icelabs.bigman.volunteeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680958823040-on47ggmlnskep06mhecqjsbhgeecuu0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eeyan.icelabs.bigman.volunteeapp",
+            "certificate_hash": "e2171b4cb1558f4c12b8721266fa65808fc411e8"
+          }
+        },
+        {
+          "client_id": "680958823040-ttdt0f71epqadut9ikkgb5n612vd39lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwG8IirGD75Ez6a4XZuacWaPVTyfRwhU4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680958823040-ttdt0f71epqadut9ikkgb5n612vd39lq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

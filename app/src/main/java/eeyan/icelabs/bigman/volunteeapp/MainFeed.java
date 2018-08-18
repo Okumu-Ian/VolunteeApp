@@ -33,7 +33,7 @@ public class MainFeed extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Newsmodel newsmodel;
     private Newsadapter newsadapter;
-    private List<Newsmodel> newsmodelList;
+    private List<Object> newsmodelList;
     private static String data_url = "https://yts.am/api/v2/list_movies.json?limit=10&page=1";
 
     @Override
