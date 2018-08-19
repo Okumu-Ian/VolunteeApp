@@ -18,14 +18,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewsFeed">
+        <activity android:name=".NewsFeed"
+            android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".MainFeed"></activity>
-        <activity android:name=".AppCompatPreferenceActivity" />
-        <activity android:name=".Settings" />
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".MainFeed"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".AppCompatPreferenceActivity"
+            />
+        <activity android:name=".Settings"
+            android:screenOrientation="portrait"/>
         <activity android:name=".PickSkill"
+            android:screenOrientation="portrait"
             android:label="Pick your skill">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
