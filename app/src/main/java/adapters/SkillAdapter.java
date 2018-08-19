@@ -1,25 +1,36 @@
 package adapters;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import eeyan.icelabs.bigman.volunteeapp.NewsFeed;
 import eeyan.icelabs.bigman.volunteeapp.R;
 import models.SkillModel;
 
@@ -31,22 +42,17 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
 
     private List<SkillModel> modelList;
     private Context context;
-    private Activity activity;
+    private Activity myActivity;
     private View view;
     private List<SkillModel> sortedList;
-    private List<SkillModel> selectedList;
-    private OnClickAction onClickAction;
 
-    public SkillAdapter(List<SkillModel> modelList, Context context) {
+
+    public SkillAdapter(List<SkillModel> modelList, Context context, Activity myActivity) {
         this.modelList = modelList;
         this.context = context;
         this.sortedList = modelList;
-        this.selectedList = new ArrayList<>();
-    }
+        this.myActivity = myActivity;
 
-    public interface OnClickAction
-    {
-         void OnClickAction();
     }
 
     @Override
@@ -54,10 +60,12 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
         return myHolder(parent);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(final MainHolder holder, int position) {
+    public void onBindViewHolder(final MainHolder holder, final int position) {
 
         final SkillModel model = sortedList.get(position);
+        holder.mainImage.setClickable(true);
         Picasso.get().load(model.getSkill_image_local()).into(holder.mainImage);
         holder.mainText.setText(model.getSkill_name());
         holder.compatButton.setOnClickListener(new View.OnClickListener() {
@@ -66,32 +74,55 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
                 v.setEnabled(false);
             }
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selectedList.contains(model))
-                {
-                    selectedList.remove(model);
-                    unhighlightSelectedItem(holder);
-                }else
-                    {
-                        selectedList.add(model);
-                        highlightSelectedItem(holder);
-                    }
+               showDialog(myActivity,model.getSkill_name());
 
-                    onClickAction.OnClickAction();
             }
         });
-        if (selectedList.contains(model))
-            highlightSelectedItem(holder);
-        else
-            unhighlightSelectedItem(holder);
 
     }
+
     private MainHolder myHolder(ViewGroup parent)
     {
         view = LayoutInflater.from(context).inflate(R.layout.skillset,parent,false);
         return new MainHolder(view);
+    }
+
+    private void showDialog(final Activity mContext, final String TITLE)
+    {
+        String title = "Choose category?";
+        String message = "Are you sure you want to choose "+TITLE+"?";
+        String positiveBtn = "NO";
+        String negativeBtn = "Yes";
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(false);
+        builder.setPositiveButton(positiveBtn, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton(negativeBtn, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                putValueToPref(TITLE);
+                mContext.startActivity(new Intent(mContext, NewsFeed.class));
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+
+    private void putValueToPref(String data)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MY_PREF_SKILL",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("my_skill",data);
+        editor.commit();
     }
 
     @Override
@@ -136,66 +167,19 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
         };
     }
 
-    public interface SkillAdapterList
-    {
-        void onSkillSelected(SkillModel model);
-    }
 
-    private void highlightSelectedItem(MainHolder holder)
-    {
-            holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.cardview_dark_background));
-    }
-
-    private void unhighlightSelectedItem(MainHolder holder)
-    {
-            holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context,android.R.color.transparent));
-    }
-
-    private void clearAll(boolean isNotify)
-    {
-        sortedList.clear();
-        selectedList.clear();
-        modelList.clear();
-        if (isNotify) notifyDataSetChanged();
-
-    }
-
-    private void clearSelection()
-    {
-        selectedList.clear();
-        notifyDataSetChanged();
-    }
-
-    private void addALl(List<SkillModel> models)
-    {
-        clearAll(false);
-        this.sortedList = models;
-        notifyDataSetChanged();
-    }
-
-    private List<SkillModel> models()
-    {
-        return selectedList;
-    }
-
-    private void setActionModeReceiver(OnClickAction action)
-    {
-            this.onClickAction = action;
-    }
 
     public class MainHolder extends RecyclerView.ViewHolder
     {
         private ImageView mainImage;
         private TextView mainText;
         private AppCompatButton compatButton;
-        private LinearLayout linearLayout;
         public MainHolder(View itemView) {
             super(itemView);
             mainImage = (ImageView) itemView.findViewById(R.id.background_image_skillset);
             mainText = (TextView) itemView.findViewById(R.id.txt_skill_name);
             compatButton = (AppCompatButton) itemView.findViewById(R.id.btn_skill_select);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.mainColor);
-        }
+            }
     }
 
 }

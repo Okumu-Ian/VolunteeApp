@@ -2,15 +2,20 @@ package eeyan.icelabs.bigman.volunteeapp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,38 +30,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.RecyclerItemListener;
 import adapters.SkillAdapter;
 import models.SkillModel;
 
-public class PickSkill extends AppCompatActivity implements SkillAdapter.OnClickAction {
+import static adapters.SkillAdapter.*;
+
+public class PickSkill extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private List<SkillModel> modelList;
     private SkillModel skillModel;
     private SkillAdapter adapter;
     private android.widget.SearchView searchView;
-    private ActionMode actionMode;
-    private ActionMode.Callback callback = new ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode actionMode) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +60,6 @@ public class PickSkill extends AppCompatActivity implements SkillAdapter.OnClick
         loadDetails();
     }
 
-
     private void loadataFromNet(String URL)
     {
 
@@ -85,6 +70,14 @@ public class PickSkill extends AppCompatActivity implements SkillAdapter.OnClick
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("myArray");
+                    for (int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String name = object.getString("");
+                        String image = object.getString("");
+                        String items = object.getString("");
+                        String identity = object.getString("");
+                    }
                 }catch (JSONException exc)
                 {
 
@@ -129,17 +122,40 @@ public class PickSkill extends AppCompatActivity implements SkillAdapter.OnClick
             skillModel = new SkillModel();
             skillModel.setSkill_image_local(myInt[i]);
             skillModel.setSkill_name(myStrings[i]);
+            skillModel.setSkill_id(""+i);
             modelList.add(skillModel);
         }
-        adapter = new SkillAdapter(modelList,getApplicationContext());
+        adapter = new SkillAdapter(modelList,getApplicationContext(),PickSkill.this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return id == R.id.app_bar_search || super.onOptionsItemSelected(item);
+        switch (id)
+        {
+            case R.id.action_share:
+                shareIntent();
+                break;
+            case R.id.app_bar_search:
+                break;
+            default:
+                super.onOptionsItemSelected(item);
 
+        }
+        return true;
+    }
+
+    private void shareIntent()
+    {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setAction("text/plain");
+        String shareBodyText = "https://play.google.com/youtube";
+        String shareTitle = "Hey guys check out VolunteeApp. Its really cool.";
+        String chooseTitle = "Choose sharing method";
+        intent.putExtra(Intent.EXTRA_SUBJECT,shareTitle);
+        intent.putExtra(Intent.EXTRA_TEXT,shareBodyText);
+        startActivity(Intent.createChooser(intent,chooseTitle));
     }
 
     @Override
@@ -165,8 +181,5 @@ public class PickSkill extends AppCompatActivity implements SkillAdapter.OnClick
         return true;
     }
 
-    @Override
-    public void OnClickAction() {
 
-    }
 }

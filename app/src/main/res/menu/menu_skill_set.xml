@@ -7,13 +7,13 @@
         android:id="@+id/app_bar_search"
         app:actionViewClass="android.widget.SearchView"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search"
-        app:showAsAction="always"
+        android:title="@string/search"
+        app:showAsAction="ifRoom"
         />
     <item
-        android:title="Share"
+        android:title="@string/share"
         android:id="@+id/action_share"
         app:showAsAction="never"
-        />
+         />
 
 </menu>
