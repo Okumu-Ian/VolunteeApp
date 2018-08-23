@@ -9,10 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,9 +115,11 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
             }
         });
         builder.setNegativeButton(negativeBtn, new DialogInterface.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 putValueToPref(TITLE);
+                setupTransitions();
                 mContext.startActivity(new Intent(mContext, MainFeed.class));
                 mContext.finish();
             }
@@ -122,6 +127,15 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
         builder.create();
         builder.show();
     }
+
+    @RequiresApi(21)
+    private void setupTransitions()
+    {
+        Slide slide = (Slide) TransitionInflater.from(myActivity).inflateTransition(R.transition.slide_it);
+        myActivity.getWindow().setExitTransition(slide);
+
+    }
+
 
     private void putValueToPref(String data)
     {

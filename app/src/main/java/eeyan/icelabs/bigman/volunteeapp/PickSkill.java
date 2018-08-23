@@ -1,5 +1,6 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Api;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +53,7 @@ public class PickSkill extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_skill);
         initUI();
+        //setupTransitions();
     }
 
     private void initUI()
@@ -90,6 +95,14 @@ public class PickSkill extends AppCompatActivity{
             }
         });
         Volley.newRequestQueue(getApplicationContext()).add(request);
+
+    }
+
+    @TargetApi(21)
+    private void setupTransitions()
+    {
+        Slide slide = (Slide) TransitionInflater.from(this).inflateTransition(R.transition.slide_it);
+        getWindow().setExitTransition(slide);
 
     }
 

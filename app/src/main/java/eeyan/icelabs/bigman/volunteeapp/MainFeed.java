@@ -1,5 +1,6 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,9 +51,9 @@ public class MainFeed extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //preventing screenshots in the application
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         this.setContentView(R.layout.activity_main_feed);
+        setUpTransition();
         initUI();
         loadData(data_url);
 
@@ -74,6 +77,13 @@ public class MainFeed extends AppCompatActivity {
             }
         });
 
+    }
+
+    @TargetApi(21)
+    private void setUpTransition()
+    {
+        Fade fade = (Fade) TransitionInflater.from(MainFeed.this).inflateTransition(R.transition.fade_it);
+        getWindow().setEnterTransition(fade);
     }
 
     @Override
