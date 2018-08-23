@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import eeyan.icelabs.bigman.volunteeapp.MainFeed;
 import eeyan.icelabs.bigman.volunteeapp.NewsFeed;
 import eeyan.icelabs.bigman.volunteeapp.R;
 import models.SkillModel;
@@ -46,6 +47,10 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
     private View view;
     private List<SkillModel> sortedList;
 
+    /*TODO
+    1.Add Window transitions.
+    2.Database design
+   */
 
     public SkillAdapter(List<SkillModel> modelList, Context context, Activity myActivity) {
         this.modelList = modelList;
@@ -110,7 +115,8 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.MainHolder> 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 putValueToPref(TITLE);
-                mContext.startActivity(new Intent(mContext, NewsFeed.class));
+                mContext.startActivity(new Intent(mContext, MainFeed.class));
+                mContext.finish();
             }
         });
         builder.create();

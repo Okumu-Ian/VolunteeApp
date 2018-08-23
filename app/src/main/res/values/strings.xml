@@ -149,4 +149,5 @@
     <string name="ad_unit_id">ca-app-pub-3516471139276349/6908458202</string>
     <string name="search">Search</string>
     <string name="share">Share</string>
+    <string name="show_relevant">Show Relevant</string>
 </resources>
