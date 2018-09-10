@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/img_job_details"
+                android:src="@drawable/seven"
+                android:scaleType="fitXY"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="130dp"
+                android:padding="10dp">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:elevation="@dimen/cardview_default_elevation"
+                    app:cardElevation="@dimen/cardview_default_elevation"
+                    app:cardCornerRadius="@dimen/cardview_default_radius">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="2.5dip">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Job Title Goes Here"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="17sp"
+                            android:fontFamily="sans-serif"
+                            android:id="@+id/txt_job_title"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Job provider"
+                            android:textSize="13sp"
+                            android:id="@+id/txt_job_provider"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:textColor="@color/grey"
+                            android:textStyle="bold"/>
+
+
+                            <RatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:rating="4.5"
+                                android:id="@+id/ratingBar_job"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$ FREE"
+                            android:textSize="17sp"
+                            android:textColor="@color/green"
+                            android:textStyle="bold"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="5dp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/white"
+                    app:cardElevation="@dimen/cardview_default_elevation"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    android:elevation="@dimen/cardview_default_elevation">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="2.5dip">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text="Description"
+                            android:layout_margin="2.5dip"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txt_job_description"
+                            android:text="@string/test_string"
+                            />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_margin="10dip">
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:layout_marginEnd="5dp"
+                        android:textAllCaps="false"
+                        android:text="Apply"
+                        android:id="@+id/btn_apply"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/colorPrimary"
+                        android:text="Add to Wishlist"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:id="@+id/btn_wish_list"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </ScrollView>
+</FrameLayout>

@@ -1,17 +1,22 @@
 package eeyan.icelabs.bigman.volunteeapp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,13 +33,35 @@ public class ProfileActivity extends AppCompatActivity {
     private List<Profileitems> profileitemsList;
     private CircleImageView circleImageView;
     private ImageView imageView;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private TextView userEmail,userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        configureFirebase();
         initUI();
 
+    }
+
+    private void configureFirebase()
+    {
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+    }
+
+    private String getName()
+    {
+        String name = user.getDisplayName();
+        return name;
+    }
+
+    private String getEmail()
+    {
+        String userEmail = user.getEmail();
+        return userEmail;
     }
 
     private void initUI()
@@ -47,7 +74,13 @@ public class ProfileActivity extends AppCompatActivity {
         circleImageView = (CircleImageView) findViewById(R.id.img_profile_photo);
         imageView = (ImageView) findViewById(R.id.img_profile_cover);
 
+        userEmail = (TextView) findViewById(R.id.txt_profile_email);
+        userName = (TextView) findViewById(R.id.txt_profile_name);
+
         prepareData();
+
+        userEmail.setText(getEmail());
+        userName.setText(getName());
     }
 
     private void prepareData()

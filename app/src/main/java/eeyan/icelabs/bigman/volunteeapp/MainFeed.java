@@ -2,20 +2,27 @@ package eeyan.icelabs.bigman.volunteeapp;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -25,6 +32,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.baoyz.widget.PullRefreshLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,21 +57,58 @@ public class MainFeed extends AppCompatActivity {
     private SensorManager sensorManager;
     private ShakeDetector detector;
     private Sensor accelerometer;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private PullRefreshLayout refreshLayout;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         this.setContentView(R.layout.activity_main_feed);
-        setUpTransition();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Explode());
+            getWindow().setExitTransition(new Explode());
+        }
         initUI();
+
+        checkCurrentUser();
         loadData(data_url);
 
+    }
+
+    private void checkCurrentUser()
+    {
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if (user!=null)
+            return;
+            else
+                startActivity(new Intent(MainFeed.this,LoginActivity.class));
     }
 
     private void initUI()
     {
         newsmodelList = new ArrayList<>();
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.pullRefreshLayout);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_RING);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                   loadData(data_url);
+                   refreshLayout.setRefreshing(false);
+                    }
+                },5000);
+
+
+            }
+        });
         recyclerView = (RecyclerView) findViewById(R.id.newsList);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -72,9 +119,7 @@ public class MainFeed extends AppCompatActivity {
         detector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             @Override
             public void OnShake(int count) {
-               // Toast.makeText(MainFeed.this, "Shake event registered", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainFeed.this, ""+count, Toast.LENGTH_SHORT).show();
-            }
+                }
         });
 
     }
@@ -154,6 +199,10 @@ public class MainFeed extends AppCompatActivity {
         {
             case R.id.app_bar_switch:
                 Toast.makeText(this, "Kindly shake to referesh", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.app_bar_logout:
+                auth.getInstance().signOut();
+                finish();
                 break;
             default:
                 break;

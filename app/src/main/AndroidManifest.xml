@@ -10,9 +10,14 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.BODY_SENSORS"/>
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
-    <uses-feature android:name="android.hardware.Sensor.accelerometer" android:required="true"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.Sensor.accelerometer"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -21,22 +26,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewsFeed"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ProfileActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".MainFeed"
+        <activity
+            android:name=".NewsFeed"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".AppCompatPreferenceActivity"
-            />
-        <activity android:name=".Settings"
+        <activity
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MainFeed"
             android:screenOrientation="portrait"/>
-        <activity android:name=".PickSkill"
-            android:screenOrientation="portrait"
-            android:label="Pick your skill">
+        <activity android:name=".AppCompatPreferenceActivity" />
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PickSkill"
+            android:label="Pick your skill"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,22 +11,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="2dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dip"
                 android:layout_margin="0.5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/img_newsfeed_poster"/>
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:id="@+id/img_newsfeed_poster"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_overlay="true"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="20dip"
+                    android:layout_gravity="center_vertical">
                     <TextView
                         android:id="@+id/txt_name_holder"
                         android:layout_width="match_parent"
@@ -35,12 +42,17 @@
                         android:text="@string/test_name"
                         android:textColor="@color/black"
                         android:textSize="@dimen/newsfeed_17sp"
+                        android:layout_marginEnd="5dp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/txt_timestamp_holder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/just_now"
+                        android:layout_marginEnd="5dp"
+                        android:padding="@dimen/newsfeed_txt_padding"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
                         android:textSize="@dimen/newsfeed_13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -51,6 +63,8 @@
                 android:layout_marginStart="5dp"
                 android:text="@string/test_string"
                 android:layout_marginTop="5dp"
+                android:lines="3"
+                android:ellipsize="end"
                 android:id="@+id/txt_newsfeed_main_text"/>
             <ImageView
                 android:id="@+id/img_newsfeed_post"
